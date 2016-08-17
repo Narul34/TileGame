@@ -2,19 +2,19 @@ package tilegame.state;
 
 import java.awt.Graphics;
 
-import tilegame.Game;
+import tilegame.Handler;
 
-// Interface qui permet d'indiquer l'etat géré par le programme (Jeu, menu...)
+// classe abstraite qui permet d'indiquer l'etat géré par le programme (GameState, menuState...) qui seront ses enfants
 
 public abstract class State {
 
 	private static State CurrentState = null;	
-	protected Game game;
+	protected Handler handler;
 	
 	// ========== Constructeur ==========
 	
-	public State(Game game) {
-		this.game = game;
+	public State(Handler handler) {
+		this.handler = handler;
 	}
 	
 	// ========= Accesseur ==========
@@ -27,7 +27,7 @@ public abstract class State {
 		CurrentState = currentState;
 	}
 	
-	// Fonctions maj des variables (tick) et reaffiche, rendu (render)
+	// Fonctions maj des variables (tick) et reaffiche, rendu (render), inutilisé jusqu'ici, puisque un seul etat pour l'instant
 	
 	public abstract void tick();
 	

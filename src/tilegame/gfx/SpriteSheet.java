@@ -2,7 +2,9 @@ package tilegame.gfx;
 
 import java.awt.image.BufferedImage;
 
-// Cette classe permet de prendre une image et d'y appliquer une methode pour n'afficher uqe la partie voulu de cette image.
+/* Cette classe permet de prendre une image et d'y appliquer une methode pour n'afficher que la partie voulue de cette image.
+ * On a besoin d'une image et d'une fonction permettant de la découpé.
+ */
 
 public class SpriteSheet {
 	

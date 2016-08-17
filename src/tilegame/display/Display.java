@@ -34,7 +34,7 @@ public class Display {
 		frame.setLocationRelativeTo(null); // centrage de la fenetre sur l'écran
 		frame.setVisible(true);// rendre la fenetre visible
 		
-		canvas = new Canvas();// nouveau canevas declaré : trois type de format de la fenetre
+		canvas = new Canvas();// nouveau canevas declaré : trois type de format de la fenetre (agis comme une JPanel)
 		canvas.setPreferredSize(new Dimension(width, height)); 
 		canvas.setMaximumSize(new Dimension(width, height));
 		canvas.setMinimumSize(new Dimension(width, height));
@@ -42,9 +42,13 @@ public class Display {
 ;		
 		// On l'ajoute au frame
 		frame.add(canvas);
-		frame.pack();
+		frame.pack();// force l'image à se définir avec les taille défini en PRefered size
 	}
+	
+	
 
+	// ========= Accesseurs ============
+	
 	public Canvas getCanvas() {
 		return canvas;
 	}

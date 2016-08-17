@@ -42,6 +42,8 @@ public class Game implements Runnable{
 	// Camera
 	private GameCamera gameCamera;
 	
+	//Handler
+	private Handler handler;
 	
 	//=========CONSTRUCTOR============
 	public Game(String title, int width, int height) {
@@ -58,10 +60,12 @@ public class Game implements Runnable{
 		display.getFrame().addKeyListener(keyManager);
 		Assets.init();
 		
-		gameCamera = new GameCamera(this, 0, 0);
+		handler = new Handler(this);
+		gameCamera = new GameCamera(handler, 0, 0);
 		
-		gameState = new GameState(this);
-		menuState = new MenuState(this);
+		
+		gameState = new GameState(handler);
+		menuState = new MenuState(handler);
 		State.setCurrentState(gameState);
 	}
 	
@@ -110,11 +114,11 @@ public class Game implements Runnable{
 		init();
 		
 		int fps = 70;
-		double timePerTick = 1000000000 / fps;
-		double delta = 0;
-		long now;
-		long lastTime = System.nanoTime();
-		long timer = 0;
+		double timePerTick = 1000000000 / fps; // en nanoseconde
+		double delta = 0; // valeur utilisé pour le rendu, on met a jour et on reaffiche seulement lorsqu'elle vaut 1 ou plus
+		long now; // temps actuel
+		long lastTime = System.nanoTime(); // dernier temps relevé
+		long timer = 0; // le temps qui s'est ecoulé entre maintenant et le dernier temps relevé
 		//int ticks = 0;
 		
 		while(running) {
@@ -139,6 +143,9 @@ public class Game implements Runnable{
 		
 		stop();
 	}
+	
+	
+	//======= Accesseurs =========
 	
 	public KeyManager getKeyManager() {
 		return keyManager;		
@@ -166,6 +173,7 @@ public class Game implements Runnable{
 		thread.start(); // cette ligne appel la fonction run()
 	}
 	
+	// Fonction qui arrete le programme si il est démarrer
 	public synchronized void stop() {
 		if (!running)
 			return;
